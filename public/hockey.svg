@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+
+  <!-- Hockey stick -->
+  <path d="
+    M30 15
+    L67 82
+    Q72 92 84 92
+    L105 87"
+    fill="none"
+    stroke="#7A4727"
+    stroke-width="11"
+    stroke-linecap="round"
+    stroke-linejoin="round"/>
+
+  <!-- Stick highlight -->
+  <path d="
+    M31 16
+    L69 82"
+    fill="none"
+    stroke="#D49A65"
+    stroke-width="3"
+    stroke-linecap="round"/>
+
+  <!-- Tape -->
+  <path d="
+    M23 11 L39 4"
+    stroke="#E9EEF3"
+    stroke-width="8"
+    stroke-linecap="round"/>
+
+  <!-- Puck -->
+  <ellipse cx="82" cy="101"
+           rx="25" ry="8"
+           fill="#20252C"
+           stroke="#172033"
+           stroke-width="4"/>
+
+  <path d="
+    M57 101
+    L57 107
+    Q57 114 82 114
+    Q107 114 107 107
+    L107 101"
+    fill="#343A43"
+    stroke="#172033"
+    stroke-width="4"/>
+
+  <ellipse cx="82" cy="101"
+           rx="19" ry="4"
+           fill="#11151A"/>
+</svg>
