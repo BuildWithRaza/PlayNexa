@@ -6,6 +6,7 @@ import {
   FaYoutube,
   FaArrowRight,
 } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -73,31 +74,31 @@ const Footer = () => {
               Platform
             </h3>
 
-            <div className="mt-5 space-y-3 text-sm text-slate-500">
+            <div className="mt-5 flex flex-col space-y-3 text-sm text-slate-500">
 
-              <p className="cursor-pointer transition hover:text-blue-600">
+              <Link to="/home" className="cursor-pointer transition hover:text-blue-600">
                 Home
-              </p>
+              </Link>
 
-              <p className="cursor-pointer transition hover:text-blue-600">
+              <Link to="/players" className="cursor-pointer transition hover:text-blue-600">
                 Players
-              </p>
+              </Link>
 
-              <p className="cursor-pointer transition hover:text-blue-600">
+              <Link to="/teams" className="cursor-pointer transition hover:text-blue-600">
                 Teams
-              </p>
+              </Link>
 
-              <p className="cursor-pointer transition hover:text-blue-600">
+              <Link to="/matches" className="cursor-pointer transition hover:text-blue-600">
                 Matches
-              </p>
+              </Link>
 
-              <p className="cursor-pointer transition hover:text-blue-600">
+              <Link to="tournaments" className="cursor-pointer transition hover:text-blue-600">
                 Tournaments
-              </p>
+              </Link>
 
-              <p className="cursor-pointer transition hover:text-blue-600">
+              <Link to="/leaderboard" className="cursor-pointer transition hover:text-blue-600">
                 Leaderboard
-              </p>
+              </Link>
 
             </div>
 
@@ -336,7 +337,7 @@ const Footer = () => {
 
           {/* Bottom Right Text */}
           <p className="font-semibold text-slate-500">
-            made for sport lovers{" "}
+            Made for sport lovers{" "}
             <span className="text-red-500">♥</span>
           </p>
 

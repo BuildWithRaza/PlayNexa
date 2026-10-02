@@ -14,11 +14,12 @@ import WhyPlayNexa from '../components/LandingPageComponents/WhyPlayNexa';
 import Footer from '../components/Other/Footer';
 import FinalCTA from '../components/LandingPageComponents/FinalCTA';
 
+
 const Landing = () => {
   return (
     <div>
      
-     
+    
       <HeroAndStats/>
       <Sports/>
       <PlayNexaWorks/>

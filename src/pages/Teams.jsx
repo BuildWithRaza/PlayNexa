@@ -1,45 +1,53 @@
 import React from 'react'
 import { FaStar, FaLocationDot, FaArrowRight } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
+import { teams } from '../utils/data';
 
 const Teams = () => {
-    const teams = [
-    {
-      name: "Delhi Capitals",
-      sport: "Football",
-      members: "15 Members",
-      location: "Delhi",
-      rating: "4.8",
-      image:
-        "https://static.vecteezy.com/system/resources/previews/059/494/378/non_2x/delhi-capitals-original-ipl-team-official-logo-premium-design-for-digital-download-free-vector.jpg",
-    },
-    {
-      name: "Royal Challengers Bengaluru",
-      sport: "Cricket",
-      members: "15 Members",
-      location: "Bangalore",
-      rating: "4.7",
-      image:
-        "https://1000logos.net/wp-content/uploads/2024/03/Royal-Challengers-Bengaluru-Logo-2020.png",
-    },
-    {
-      name: "UP Warriors",
-      sport: "Cricket",
-      members: "15 Members",
-      location: "Lucknow",
-      rating: "4.6",
-      image:
-        "https://www.deccanchronicle.com/h-upload/2025/11/28/1983729-up-warriorz.webp",
-    },
-    {
-      name: "Mumbai Strikers",
-      sport: "Basketball",
-      members: "15 Members",
-      location: "Mumbai",
-      rating: "4.5",
-      image:
-        "https://i.pinimg.com/originals/3a/54/40/3a544070d9c5e75d6795f39dfa295db5.jpg",
-    },
-  ];
+  const navigate=useNavigate()
+
+   const handleClick=(e)=>{
+    console.log(e)
+      navigate(`/teams/${e.id}`)
+  }
+  //   const teams = [
+  //   {
+  //     name: "Delhi Capitals",
+  //     sport: "Football",
+  //     members: "15 Members",
+  //     location: "Delhi",
+  //     rating: "4.8",
+  //     image:
+  //       "https://static.vecteezy.com/system/resources/previews/059/494/378/non_2x/delhi-capitals-original-ipl-team-official-logo-premium-design-for-digital-download-free-vector.jpg",
+  //   },
+  //   {
+  //     name: "Royal Challengers Bengaluru",
+  //     sport: "Cricket",
+  //     members: "15 Members",
+  //     location: "Bangalore",
+  //     rating: "4.7",
+  //     image:
+  //       "https://1000logos.net/wp-content/uploads/2024/03/Royal-Challengers-Bengaluru-Logo-2020.png",
+  //   },
+  //   {
+  //     name: "UP Warriors",
+  //     sport: "Cricket",
+  //     members: "15 Members",
+  //     location: "Lucknow",
+  //     rating: "4.6",
+  //     image:
+  //       "https://www.deccanchronicle.com/h-upload/2025/11/28/1983729-up-warriorz.webp",
+  //   },
+  //   {
+  //     name: "Mumbai Strikers",
+  //     sport: "Basketball",
+  //     members: "15 Members",
+  //     location: "Mumbai",
+  //     rating: "4.5",
+  //     image:
+  //       "https://i.pinimg.com/originals/3a/54/40/3a544070d9c5e75d6795f39dfa295db5.jpg",
+  //   },
+  // ];
 
   const sportStyles = {
     Football: {
@@ -199,7 +207,9 @@ const Teams = () => {
     
                     {/* Join Button */}
                     <button
+                    onClick={()=>{handleClick(team)}}
                       className="
+                      
                         w-full
                         rounded-lg
                         border border-blue-200
@@ -213,7 +223,7 @@ const Teams = () => {
                         hover:text-white
                       "
                     >
-                      Join Team
+                      View Details
                     </button>
     
                   </div>

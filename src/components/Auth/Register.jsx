@@ -1,8 +1,11 @@
 
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+
+  const navigate=useNavigate()
 
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
@@ -14,20 +17,73 @@ const Register = () => {
     e.preventDefault();
     console.log("email is", email);
     console.log("password is", password);
+    if(password===cnfpassword){
+      navigate("/playerdash/PLY001")
     setFullname("");
     setEmail("");
     setPassword("");
-    setCnfPassword("");
+    setCnfPassword("")
+    }
   }
   return (
     <div className='flex justify-center items-center w-screen h-full bg-blue-100 py-10'>
       <div className='flex flex-col justify-center items-cente w-fit px-5 bg-white border-[rgb(210,230,233)] border-2 rounded-xl py-14'>
+        <div className='flex justify-center mb-3'>
+           <Link
+                      to="/"
+                      className="flex shrink-0 items-center gap-2.5"
+                    >
+                      <div
+                        className="
+                          flex
+                          h-10
+                          w-10
+                          items-center
+                          justify-center
+                          rounded-xl
+                          bg-gradient-to-br
+                          from-blue-600
+                          to-cyan-500
+                          text-sm
+                          font-black
+                          text-white
+                          shadow-sm
+                          shadow-blue-200
+                        "
+                      >
+                        PN
+                      </div>
+          
+                      <div className="hidden sm:block">
+                        <h1 className="text-xl font-black leading-none tracking-tight">
+                          <span className="text-slate-900">Play</span>
+          
+                          <span
+                            className="
+                              bg-gradient-to-r
+                              from-blue-600
+                              to-cyan-500
+                              bg-clip-text
+                              text-transparent
+                            "
+                          >
+                            Nexa
+                          </span>
+                        </h1>
+          
+                        <p className="mt-1 text-[7px] font-bold tracking-[0.22em] text-slate-400">
+                          PLAY • CONNECT • COMPETE
+                        </p>
+                      </div>
+                    </Link>
+        </div>
         <h1 className='text-center text-4xl text-blue-700 font-bold'>Create your Account</h1>
         <h3 className='text-center text-xl text-blue-600 font-semibold '>Create a new Account</h3>
         <form onSubmit={(e) => {
           submitHandler(e);
         }} className='flex flex-col justify-center items-center gap-4 px-8 py-3'>
 
+         
           <div>
             <h2 className='text-lg font-semibold mb-2'>Full Name</h2>
             <input value={fullname} onChange={e => { setFullname(e.target.value) }} className='w-[350px]  h-[50px] border-2 bg-stone-200 py-2 border-stone-300 text-black placeholder:text-black placeholder:font-medium px-5 rounded-md' type="text" required placeholder="Enter your Full Name" />

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom';
 import { BiFootball } from "react-icons/bi";
 import { TbCricket } from "react-icons/tb";
 import { TfiBasketball } from "react-icons/tfi";
@@ -12,6 +12,10 @@ import {
 
 
 const Sports = () => {
+    const navigate =useNavigate()
+  const handleView=()=>{
+    navigate("/sports")
+  }
     const sports = [
         {
             name: "Football",
@@ -64,6 +68,7 @@ const Sports = () => {
                     </div>
 
                     <button
+                        onClick={handleView}
                         className="self-start sm:self-auto  text-blue-600 font-semibold  hover:text-blue-700 transition" >
                         View All Sports <span className="text-xl">→</span>
                     </button>

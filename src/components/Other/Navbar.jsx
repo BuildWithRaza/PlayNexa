@@ -1,8 +1,5 @@
-
-
 import React, { useState } from "react";
-import {Link, NavLink,useNavigate } from "react-router-dom";
-import Player from "../../pages/Players";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import {
   FaBars,
   FaXmark,
@@ -10,25 +7,47 @@ import {
 } from "react-icons/fa6";
 
 const Navbar = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    "Home",
-    "Players",
-    "Teams",
-    "Matches",
-    "Tournaments",
-    "Leaderboard",
+    { name: "Home", path: "/" },
+    { name: "Players", path: "/players" },
+    { name: "Teams", path: "/teams" },
+    { name: "Sports", path: "/sports" },
+    { name: "Matches", path: "/matches" },
+    { name: "Tournaments", path: "/tournaments" },
+    { name: "Leaderboard", path: "/leaderboard" },
+    
   ];
 
-  const handleLoginClick=()=>{
-    navigate("/login")
+  const handleLoginClick = () => {
+    setIsOpen(false);
+    navigate("/login");
+  };
+
+  const handleSignUpClick = () => {
+    setIsOpen(false);
+    navigate("/signup");
+  };
+  let User=localStorage.getItem('user')
+  if(User!=""){
+    User=JSON.parse(User);
+  }
+  console.log(User)
+  
+  const LoggedInUser=localStorage.getItem('LoggedInUser');
+
+  let isUser=false;
+  if(User!=""&& User){
+    isUser=true;
   }
 
-  const handleSignUpClick=()=>{
-    navigate("/signup")
-  }
+  // "/" and "/home" should both activate Home
+  const isHomeActive =
+    location.pathname === "/" || location.pathname === "/home";
 
   return (
     <header
@@ -58,7 +77,6 @@ const Navbar = () => {
             lg:px-8
           "
         >
-
           {/* Logo */}
           <Link
             to="/"
@@ -86,11 +104,8 @@ const Navbar = () => {
             </div>
 
             <div className="hidden sm:block">
-
-              <h1 className="text-xl font-black tracking-tight leading-none">
-                <span className="text-slate-900">
-                  Play
-                </span>
+              <h1 className="text-xl font-black leading-none tracking-tight">
+                <span className="text-slate-900">Play</span>
 
                 <span
                   className="
@@ -108,62 +123,76 @@ const Navbar = () => {
               <p className="mt-1 text-[7px] font-bold tracking-[0.22em] text-slate-400">
                 PLAY • CONNECT • COMPETE
               </p>
-
             </div>
           </Link>
 
-
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-1 lg:flex">
+            {navItems.map((item) => {
+              // Special handling for Home
+              const isActive =
+                item.name === "Home"
+                  ? isHomeActive
+                  : location.pathname === item.path;
 
-            {navItems.map((item, index) => (
-              <NavLink
-                key={item}
-                to={`/${item}`}
-                className={`
-                  relative
-                  rounded-lg
-                  px-3.5
-                  py-2.5
-                  text-sm
-                  font-semibold
-                  transition-all
-                  duration-200
-                  ${
-                    index === 0
-                      ? "text-blue-600"
-                      : "text-slate-500 hover:bg-blue-50 hover:text-blue-600"
-                  }
-                `}
-              >
-                {item}
+              return (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  className={`
+                    relative
+                    rounded-lg
+                    px-3.5
+                    py-2.5
+                    text-sm
+                    font-semibold
+                    transition-all
+                    duration-200
+                    ${
+                      isActive
+                        ? "text-blue-600"
+                        : "text-slate-500 hover:bg-blue-50 hover:text-blue-600"
+                    }
+                  `}
+                >
+                  {item.name}
 
-                {/* Active underline */}
-                {index === 0 && (
-                  <span
-                    className="
-                      absolute
-                      bottom-0
-                      left-1/2
-                      h-0.5
-                      w-5
-                      -translate-x-1/2
-                      rounded-full
-                      bg-blue-600
-                    "
-                  />
-                )}
-              </NavLink>
-            ))}
-
+                  {/* Active underline */}
+                  {isActive && (
+                    <span
+                      className="
+                        absolute
+                        bottom-0
+                        left-1/2
+                        h-0.5
+                        w-5
+                        -translate-x-1/2
+                        rounded-full
+                        bg-blue-600
+                      "
+                    />
+                  )}
+                </NavLink>
+              );
+            })}
           </div>
-
 
           {/* Desktop Auth */}
           <div className="hidden items-center gap-2 sm:flex">
-
-            <button
-             onClick={handleLoginClick}
+          {isUser?<Link to={`/${LoggedInUser}/${User.id}`}><div className="h-9 w-9 overflow-hidden rounded-xl bg-blue-100">
+              {User.profileImage ? (
+                <img
+                  src={User.profileImage}
+                  alt={User.name}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center font-black text-blue-600">
+                  {User.name?.charAt(0)}
+                </div>
+              )}
+            </div></Link>:(<><button
+              onClick={handleLoginClick}
               className="
                 rounded-lg
                 px-4
@@ -179,7 +208,7 @@ const Navbar = () => {
             </button>
 
             <button
-            onClick={handleSignUpClick}
+              onClick={handleSignUpClick}
               className="
                 group
                 flex
@@ -210,10 +239,9 @@ const Navbar = () => {
                   group-hover:translate-x-0.5
                 "
               />
-            </button>
-
+            </button></>)}
+            
           </div>
-
 
           {/* Mobile Menu Button */}
           <button
@@ -243,9 +271,7 @@ const Navbar = () => {
               <FaBars className="text-lg" />
             )}
           </button>
-
         </div>
-
 
         {/* Mobile Menu */}
         {isOpen && (
@@ -262,40 +288,55 @@ const Navbar = () => {
               sm:hidden
             "
           >
-
             <div className="space-y-1">
+              {navItems.map((item) => {
+                const isActive =
+                  item.name === "Home"
+                    ? isHomeActive
+                    : location.pathname === item.path;
 
-              {navItems.map((item, index) => (
-                <a
-                  key={item}
-                  href="#"
-                  onClick={() => setIsOpen(false)}
-                  className={`
-                    block
-                    rounded-lg
-                    px-4
-                    py-3
-                    text-sm
-                    font-semibold
-                    transition
-                    ${
-                      index === 0
-                        ? "bg-blue-50 text-blue-600"
-                        : "text-slate-600 hover:bg-slate-50 hover:text-blue-600"
-                    }
-                  `}
-                >
-                  {item}
-                </a>
-              ))}
-
+                return (
+                  <NavLink
+                    key={item.name}
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`
+                      block
+                      rounded-lg
+                      px-4
+                      py-3
+                      text-sm
+                      font-semibold
+                      transition
+                      ${
+                        isActive
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-slate-600 hover:bg-slate-50 hover:text-blue-600"
+                      }
+                    `}
+                  >
+                    {item.name}
+                  </NavLink>
+                );
+              })}
             </div>
-
 
             {/* Mobile Auth */}
             <div className="mt-4 grid grid-cols-2 gap-2 border-t border-slate-100 pt-4">
-
-              <button
+              {isUser?<Link className="col-span-2 flex items-center gap-1" to={`/${LoggedInUser}/${User.id}`}><div className="h-9 w-9 overflow-hidden rounded-xl bg-blue-100">
+              {User.profileImage ? (
+                <img
+                  src={User.profileImage}
+                  alt={User.name}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center font-black text-blue-600">
+                  {User.name?.charAt(0)}
+                </div>
+              )}
+            </div>{User.name}</Link>:<>              <button
+                onClick={handleLoginClick}
                 className="
                   rounded-lg
                   border
@@ -314,6 +355,7 @@ const Navbar = () => {
               </button>
 
               <button
+                onClick={handleSignUpClick}
                 className="
                   rounded-lg
                   bg-blue-600
@@ -329,13 +371,11 @@ const Navbar = () => {
                 "
               >
                 Sign Up
-              </button>
+              </button></>}
 
             </div>
-
           </div>
         )}
-
       </nav>
     </header>
   );

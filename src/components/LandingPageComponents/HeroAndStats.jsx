@@ -12,6 +12,9 @@ const HeroAndStats = () => {
   const handleGetStarted=()=>{
     navigate("/signup")
   }
+  const handleExploreSports=()=>{
+    navigate("/sports")
+  }
   return (
     <div>
     <section className="relative overflow-hidden bg-blue-50">
@@ -196,6 +199,7 @@ const HeroAndStats = () => {
             </button>
 
             <button
+            onClick={handleExploreSports}
               className="
                 flex
                 items-center
