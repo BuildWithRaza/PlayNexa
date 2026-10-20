@@ -1,6 +1,6 @@
 import React from "react";
 
-import { players } from "../utils/data";
+
 import { useNavigate } from "react-router-dom";
 
 import { useParams, Link } from "react-router-dom";
@@ -20,12 +20,14 @@ import {
   FaBolt,
   FaDumbbell,
 } from "react-icons/fa6";
+import { getPlayers } from "../utils/localStorage";
 
 const PlayerProfile = () => {
   const { playerId } = useParams();
   const navigate=useNavigate();
 
   const user=localStorage.getItem('LoggedInUser')|| ""
+  const players=getPlayers();
  
 
   const player = players.find(

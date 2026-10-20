@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { players } from "../../utils/data";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineHome } from 'react-icons/ai'
 
@@ -88,10 +87,18 @@ const PlayerDashboard = () => {
   const navigate = useNavigate();
   const { playerId } = useParams();
 
+ let myplayers;
+ 
+
   const [activePage, setActivePage] = useState("dashboard");
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const player = players.find(
+  let localplayer=localStorage.getItem('players')||[]
+  if(localplayer){
+    myplayers=JSON.parse(localplayer)
+  }
+
+  const player = myplayers.find(
     (player) => player.id === playerId
   );
 

@@ -1,7 +1,8 @@
 import React from 'react'
 import { useParams,useNavigate } from 'react-router-dom'
-import { players } from '../utils/data'
+
 import { FaStar, FaLocationDot, FaArrowRight ,FaArrowLeft} from "react-icons/fa6";
+import { getPlayers } from '../utils/localStorage';
 
 
 
@@ -12,6 +13,7 @@ const SportDetails = () => {
       navigate(`/players/${e.id}`)
   }
     const {name}=useParams()
+    const players=getPlayers();
 
      const sportStyles = {
     Football: {

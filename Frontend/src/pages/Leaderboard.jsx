@@ -1,10 +1,13 @@
 import React from "react";
 import { FaStar, FaTrophy } from "react-icons/fa6";
-import { players } from "../utils/data";
+
 import { useNavigate } from "react-router-dom";
+import { getPlayers } from "../utils/localStorage";
 
 
 const Leaderboard = ({page}) => {
+
+  const players=getPlayers();
  
   const navigate = useNavigate()
 

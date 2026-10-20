@@ -20,7 +20,7 @@ const TrackPerformance = () => {
 
   let width;
   let isUser = false;
-  if (User != "" && User) {
+  if (User != "" && User&&role!=="admindash") {
     isUser = true;
     width = `${User.stats.winRate}%`
   }

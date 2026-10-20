@@ -5,10 +5,14 @@ import {
   FaXmark,
   FaArrowRight,
 } from "react-icons/fa6";
+import { getPlayers, getTeams } from "../../utils/localStorage";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+console.log(getPlayers())
+console.log(getTeams())
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,6 +43,7 @@ const Navbar = () => {
 
   
   const LoggedInUser=localStorage.getItem('LoggedInUser');
+  console.log(LoggedInUser)
 
   let isUser=false;
   if(User!=""&& User){

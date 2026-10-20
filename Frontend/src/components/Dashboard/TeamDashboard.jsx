@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { teams, players } from "../../utils/data";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineHome } from 'react-icons/ai'
 
@@ -30,6 +30,7 @@ import {
   FaUsers,
   FaXmark,
 } from "react-icons/fa6";
+import { getPlayers, getTeams } from "../../utils/localStorage";
 
 /* ============================================================= */
 /* SIDEBAR ITEMS */
@@ -83,6 +84,9 @@ const sidebarItems = [
 /* ============================================================= */
 
 const TeamDashboard = () => {
+
+  const teams=getTeams();
+  const players=getPlayers();
   const navigate = useNavigate();
   const { teamId } = useParams();
 

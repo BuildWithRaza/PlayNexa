@@ -1,12 +1,12 @@
 import React from 'react'
-import { FaStar, FaLocationDot, FaArrowRight } from "react-icons/fa6";
+import { FaStar, FaLocationDot, FaArrowRight,FaCheck } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
-import { teams } from '../utils/data';
+import { getTeams } from '../utils/localStorage';
 
 const Teams = ({page}) => {
   const navigate = useNavigate()
 
-  let featuredTeams = teams;
+  let featuredTeams = getTeams();
   
   const handleView=()=>{
     navigate('/teams')
@@ -172,9 +172,14 @@ const Teams = ({page}) => {
                   <div className="min-w-0 flex-1">
 
                     {/* Team Name */}
-                    <h3 className="text-base font-bold leading-5 text-slate-900">
-                      {team.name}
-                    </h3>
+                     <h3 className="flex flex-wrap gap-1 items-center truncate text-base font-bold text-slate-900">
+                                          {team.name}
+                                          {team.verified && (
+                                            <span className="flex h-3 w-3 items-center justify-center rounded-full bg-blue-600 text-xs text-white">
+                                              <FaCheck />
+                                            </span>
+                                          )}
+                                        </h3>
 
                     {/* Members */}
                     <p className="mt-1 text-xs font-medium text-slate-500">

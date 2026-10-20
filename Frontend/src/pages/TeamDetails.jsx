@@ -1,6 +1,6 @@
 import React from "react";
 
-import { teams, players } from "../utils/data";
+import { getPlayers,getTeams } from "../utils/localStorage";
 import { useNavigate } from "react-router-dom";
 
 import { useParams, Link } from "react-router-dom";
@@ -26,6 +26,11 @@ import {
 const TeamDetails = () => {
   const { teamId } = useParams();
   const navigate=useNavigate();
+
+  const players=getPlayers();
+  const teams=getTeams();
+
+
 
   let user=localStorage.getItem('LoggedInUser')
 

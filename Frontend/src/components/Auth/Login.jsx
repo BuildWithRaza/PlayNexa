@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { players,teams } from '../../utils/data';
+import { teams } from '../../utils/data';
 import { BsXLg } from 'react-icons/bs';
 
 
@@ -11,13 +11,18 @@ const Login = () => {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
 
+  const players=JSON.parse(localStorage.getItem('players'))||[]
+
+
+
+
   function submitHandler(e){
     e.preventDefault();
     console.log("email is",email);
     console.log("password is",password);
     if(email.includes("PLY")&&password==="player"){
        const player = players.find(
-          (player) => player.id === email
+          (player) => player.id === email 
         );
         
        if(player)
@@ -38,8 +43,14 @@ const Login = () => {
         else
         alert("Team Not Found")
     }
+
+    else if(email==="ADMIN" && password==="admin"){
+      localStorage.setItem("user",JSON.stringify({id:"ADMIN",name:"Admin"}));
+      localStorage.setItem("LoggedInUser","admindash");
+      navigate('/admindash/ADMIN')
+    }
     else{
-      alert("User Not Found")
+      alert("Invalid Credentials")
     }
 
     setEmail("");

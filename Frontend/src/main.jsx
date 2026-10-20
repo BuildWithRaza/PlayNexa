@@ -19,7 +19,9 @@ import TeamDashboard from './components/Dashboard/TeamDashboard.jsx'
 import SportDetails from './pages/SportDetails.jsx'
 import MatchDetails from './pages/MatchDetails.jsx'
 import TournamentDetails from './pages/TournamentDetails.jsx'
-
+import Form from './components/Auth/Form.jsx'
+import AdminDashboard from './components/Dashboard/AdminDashboard.jsx'
+import TeamSignup from './components/Auth/TeamSignUP.jsx'
 
 const router = createBrowserRouter([
   {
@@ -95,6 +97,14 @@ const router = createBrowserRouter([
     element: <Register />
   },
   {
+    path:"/playerdetailsform",
+    element:<Form/>
+  },
+  {
+    path:"/teamdetailsform",
+    element:<TeamSignup/>
+  },
+  {
     path: "/playerdash/:playerId",
     element: <PlayerDashboard />
   },
@@ -102,6 +112,10 @@ const router = createBrowserRouter([
     path: "/teamdash/:teamId",
     element: <TeamDashboard />
   },
+  {
+    path:"admindash/ADMIN",
+    element:<AdminDashboard/>
+  }
  
 
 
