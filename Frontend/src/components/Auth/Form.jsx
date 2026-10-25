@@ -121,9 +121,8 @@ const makeSkills = (sport) =>
 
 let playerCount = localStorage.getItem('players') || []
 
-if(playerCount!==""){
+if(playerCount){
     playerCount=JSON.parse(playerCount).length;
-    console.log(playerCount)
 }
 
 const initialForm = () => ({
