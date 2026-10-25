@@ -1,5 +1,5 @@
-import React from 'react'
-import { FaStar, FaLocationDot, FaArrowRight,FaCheck } from "react-icons/fa6";
+import React, { useState,useMemo } from 'react'
+import { FaStar, FaLocationDot, FaArrowRight,FaCheck,FaMagnifyingGlass,FaFilter } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import { getTeams } from '../utils/localStorage';
 
@@ -7,6 +7,16 @@ const Teams = ({page}) => {
   const navigate = useNavigate()
 
   let featuredTeams = getTeams();
+  let filteredTeam;
+
+   const [search, setSearch] = useState("");
+    const [selectedSport, setSelectedSport] = useState("All");
+
+    
+  const sports = [
+    "All",
+    ...new Set(featuredTeams.map((t) => t.sport)),
+  ];
   
   const handleView=()=>{
     navigate('/teams')
@@ -17,8 +27,27 @@ const Teams = ({page}) => {
   }
 
   if(page==="Landing" && featuredTeams.length>4){
-    featuredTeams=featuredTeams.slice(0,4)
+    filteredTeam=featuredTeams.slice(0,4)
   }
+
+   else {
+      filteredTeam = useMemo(() => {
+        return featuredTeams.filter((team) => {
+          const matchesSport =
+            selectedSport === "All" ||
+            team.sport === selectedSport;
+  
+          const query = search.toLowerCase();
+  
+          const matchesSearch =
+            team.name.toLowerCase().includes(query) ||
+            team.city.toLowerCase().includes(query) ||
+            team.country.toLowerCase().includes(query) 
+  
+          return matchesSport && matchesSearch;
+        });
+      }, [search, selectedSport]);
+    }
 
   //   const teams = [
   //   {
@@ -118,10 +147,66 @@ const Teams = ({page}) => {
 
         </div>
 
+        {page !== "Landing" && <>  <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+                  <div className="flex flex-col gap-4 md:flex-row">
+                    <div className="relative flex-1">
+                      <FaMagnifyingGlass className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-slate-400" />
+        
+                      <input
+                        type="text"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Search teams or city or country..."
+                        className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50"
+                      />
+                    </div>
+        
+                    <div className="relative md:w-64">
+                      <FaFilter className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-slate-400" />
+        
+                      <select
+                        value={selectedSport}
+                        onChange={(e) => setSelectedSport(e.target.value)}
+                        className="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50"
+                      >
+                        {sports.map((sport) => (
+                          <option key={sport} value={sport}>
+                            {sport === "All" ? "All Sports" : sport}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                  <div className="mb-5 flex items-center justify-between gap-3">
+                    <div>
+                      <h2 className="text-xl font-bold text-slate-900">
+                        Featured Teams
+                      </h2>
+                      <p className="mt-1 text-xs text-slate-500">
+                        {filteredTeam.length} Teams found
+                      </p>
+                    </div>
+        
+                    {(search || selectedSport !== "All") && (
+                      <button
+                        onClick={() => {
+                          setSearch("");
+                          setSelectedSport("All");
+                        }}
+                        className="text-xs font-semibold text-blue-600 hover:text-blue-800"
+                      >
+                        Clear filters
+                      </button>
+                    )}
+                  </div>
+                </>
+                }
+
         {/* Team Cards */}
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
-          {featuredTeams.map((team) => {
+          {filteredTeam.map((team) => {
             const sport = sportStyles[team.sport] || {
               badge: "border-slate-200 bg-slate-50 text-slate-600",
               dot: "bg-slate-500",

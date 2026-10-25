@@ -15,9 +15,14 @@ import TeamSignup from "./components/Auth/TeamSignUP";
 
 const App = () => {
 
-
-// localStorage.setItem('players',JSON.stringify(players))
-// localStorage.setItem('teams',JSON.stringify(teams))
+let players=localStorage.getItem('players')
+if(!players){
+  localStorage.setItem('players',JSON.stringify(players))
+}
+let teams=localStorage.getItem('teams')
+if(!teams){
+  localStorage.setItem('teams',JSON.stringify(teams))
+}
   return(
     <>
     <ScrollToTop/>

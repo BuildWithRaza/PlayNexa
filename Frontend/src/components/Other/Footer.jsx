@@ -112,23 +112,23 @@ const Footer = () => {
               Company
             </h3>
 
-            <div className="mt-5 space-y-3 text-sm text-slate-500">
+            <div className="mt-5 space-y-3 text-sm text-slate-500 flex flex-col">
 
-              <p className="cursor-pointer transition hover:text-blue-600">
+              <Link to={'/about'} className="cursor-pointer transition hover:text-blue-600">
                 About
-              </p>
+              </Link>
 
-              <p className="cursor-pointer transition hover:text-blue-600">
+              <Link to={"/contact"} className="cursor-pointer transition hover:text-blue-600">
                 Contact
-              </p>
+              </Link>
 
-              <p className="cursor-pointer transition hover:text-blue-600">
+              <Link to={"/privacypolicy"} className="cursor-pointer transition hover:text-blue-600">
                 Privacy Policy
-              </p>
+              </Link>
 
-              <p className="cursor-pointer transition hover:text-blue-600">
+              <Link to={"/termscondition"} className="cursor-pointer transition hover:text-blue-600">
                 Terms & Conditions
-              </p>
+              </Link>
 
             </div>
 

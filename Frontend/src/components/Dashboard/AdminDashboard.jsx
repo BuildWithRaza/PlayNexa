@@ -158,7 +158,7 @@ function ApprovalActions({ item, onVerify, onUnverify }) {
   if (item.verified === true) {
     return (
       <div className="flex items-center gap-2">
-        <StatusBadge status="Verified" />
+        {/* <StatusBadge status="Verified" /> */}
         <button
           onClick={() => onUnverify(item)}
           title="Remove verification"
@@ -489,15 +489,15 @@ export default function AdminDashboard() {
                     activePage === "Verifications") && (
                       <>
                         <td className="px-5 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 font-bold text-blue-700">
+                          <div  className="flex items-center gap-3">
+                            <div onClick={()=>{navigate(`/${item.id.includes("TEAM")?"teams":"players"}/${item.id}`)}} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 font-bold text-blue-700 cursor-pointer">
                               {displayName
                                 .split(" ")
                                 .map((part) => part[0])
                                 .join("")
                                 .slice(0, 2)}
                             </div>
-                            <div>
+                            <div >
                               <p className="font-semibold text-slate-800">
                                 {displayName}
                               </p>
@@ -516,6 +516,9 @@ export default function AdminDashboard() {
                         <td className="px-5 py-4 text-slate-600">
                           {item.sport || "—"}
                         </td>
+                       {activePage==="Players" &&(  <td className="px-5 py-4">
+                        {item.team ? item.team : "—"}
+                      </td>)}
 
                         <td className="px-5 py-4 text-slate-600">
                           {item.city || item.country || "—"}
@@ -542,12 +545,24 @@ export default function AdminDashboard() {
                   {activePage === "Teams" && (
                     <>
                       <td className="px-5 py-4">
-                        <p className="font-semibold text-slate-800">
-                          {displayName}
-                        </p>
-                        <p className="mt-1 text-xs text-slate-500">
-                          {item.id || item._id || "No ID"}
-                        </p>
+                        <div  className="flex items-center gap-3">
+                            <div onClick={()=>{navigate(`/teams/${item.id}`)}} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 font-bold text-blue-700 cursor-pointer">
+                              {displayName
+                                .split(" ")
+                                .map((part) => part[0])
+                                .join("")
+                                .slice(0, 2)}
+                            </div>
+                            <div >
+                              <p className="font-semibold text-slate-800">
+                                {displayName}
+                              </p>
+                              <p className="mt-1 text-xs text-slate-500">
+                                {item.id || item._id || "No ID"}
+                                {item.position ? ` · ${item.position}` : ""}
+                              </p>
+                            </div>
+                          </div>
                       </td>
                       <td className="px-5 py-4">{item.sport || "—"}</td>
                       <td className="px-5 py-4">

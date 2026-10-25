@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import ProtectedRoute from './components/Auth/ProtectedRoute.jsx'
+
 import Landing from './pages/Landing.jsx'
 import Players from './pages/Players.jsx'
 import Login from './components/Auth/Login.jsx'
@@ -22,6 +24,11 @@ import TournamentDetails from './pages/TournamentDetails.jsx'
 import Form from './components/Auth/Form.jsx'
 import AdminDashboard from './components/Dashboard/AdminDashboard.jsx'
 import TeamSignup from './components/Auth/TeamSignUP.jsx'
+import About from './pages/About.jsx'
+import Contact from './pages/Contact.jsx'
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx'
+import TermsCondition from './pages/TermsCondition.jsx'
+
 
 const router = createBrowserRouter([
   {
@@ -84,7 +91,23 @@ const router = createBrowserRouter([
     path:"/sports/:name",
     element:<SportDetails/>
   },
-
+  
+  {
+    path:"/about",
+    element:<About/>
+  },
+  {
+    path:"/contact",
+    element:<Contact/>
+  },
+  {
+    path:"/privacypolicy",
+    element:<PrivacyPolicy/>
+  },
+  {
+    path:"/termscondition",
+    element:<TermsCondition/>
+  },
 
     ]
   },
@@ -112,10 +135,15 @@ const router = createBrowserRouter([
     path: "/teamdash/:teamId",
     element: <TeamDashboard />
   },
-  {
+ {
+  element:<ProtectedRoute allowedRoles={["admindash"]} />,
+  children:[
+     {
     path:"admindash/ADMIN",
     element:<AdminDashboard/>
   }
+  ]
+ }
  
 
 
