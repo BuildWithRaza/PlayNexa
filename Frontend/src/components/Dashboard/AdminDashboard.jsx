@@ -29,16 +29,16 @@ import {
    - key-teams
    -------------------------------------------------- */
 
-// Read existing localStorage data safely.
-function readLocalData(key) {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(key) || "[]");
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (error) {
-    console.error(`Unable to read ${key}:`, error);
-    return [];
-  }
-}
+// // Read existing localStorage data safely.
+// function readLocalData(key) {
+//   try {
+//     const parsed = JSON.parse(localStorage.getItem(key) || "[]");
+//     return Array.isArray(parsed) ? parsed : [];
+//   } catch (error) {
+//     console.error(`Unable to read ${key}:`, error);
+//     return [];
+//   }
+// }
 
 // Supports different name fields in your records.
 function getRecordName(item) {

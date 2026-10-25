@@ -30,6 +30,7 @@ import {
   FaCircle,
   FaFire,
 } from "react-icons/fa6";
+import { getPlayers } from "../../utils/localStorage";
 
 
 /* ============================================================= */
@@ -87,16 +88,13 @@ const PlayerDashboard = () => {
   const navigate = useNavigate();
   const { playerId } = useParams();
 
- let myplayers;
+ 
  
 
   const [activePage, setActivePage] = useState("dashboard");
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  let localplayer=localStorage.getItem('players')||[]
-  if(localplayer){
-    myplayers=JSON.parse(localplayer)
-  }
+ let myplayers=getPlayers();
 
   const player = myplayers.find(
     (player) => player.id === playerId
