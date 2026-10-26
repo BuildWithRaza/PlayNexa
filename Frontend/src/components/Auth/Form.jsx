@@ -11,6 +11,7 @@ import {
     CheckCircle2,
     LoaderCircle,
 } from "lucide-react";
+import { getPlayers } from "../../utils/localStorage";
 
 
 
@@ -119,7 +120,7 @@ const makeStats = (sport) =>
 const makeSkills = (sport) =>
     Object.fromEntries(SPORTS[sport].skills.map(([key]) => [key, 50]));
 
-let playerCount = localStorage.getItem('players') || []
+let playerCount = getPlayers();
 
 if(playerCount){
     playerCount=JSON.parse(playerCount).length;
