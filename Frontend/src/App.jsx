@@ -15,12 +15,12 @@ import TeamSignup from "./components/Auth/TeamSignUP";
 
 const App = () => {
 
-let players=localStorage.getItem('players')
-if(!players){
+let localplayers=localStorage.getItem('players')
+if(!localplayers){
   localStorage.setItem('players',JSON.stringify(players))
 }
-let teams=localStorage.getItem('teams')
-if(!teams){
+let localteams=localStorage.getItem('teams')
+if(!localteams){
   localStorage.setItem('teams',JSON.stringify(teams))
 }
   return(
