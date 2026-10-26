@@ -123,7 +123,7 @@ const makeSkills = (sport) =>
 let playerCount = getPlayers();
 
 if(playerCount){
-    playerCount=JSON.parse(playerCount).length;
+    playerCount=playerCount.length;
 }
 
 const initialForm = () => ({
